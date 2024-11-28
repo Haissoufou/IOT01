@@ -40,7 +40,7 @@ void setup()
     delay(1000);
     pinMode(boosten, OUTPUT);
     digitalWrite(boosten, HIGH);
-    delay(2000);
+    delay(1500);
     Serial.begin(115200);
     bool result = power.begin(Wire, AXP2101_SLAVE_ADDRESS, i2c_sda, i2c_scl);
     if (result == false) {
