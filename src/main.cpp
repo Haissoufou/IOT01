@@ -40,15 +40,16 @@ void setup()
     delay(1000);
     pinMode(boosten, OUTPUT);
     digitalWrite(boosten, HIGH);
-    delay(1500);
+    delay(1000);
     Serial.begin(115200);
     bool result = power.begin(Wire, AXP2101_SLAVE_ADDRESS, i2c_sda, i2c_scl);
     if (result == false) {
         Serial.println("power is not online..."); while (1)delay(50);
     }
     Serial.printf("getID:0x%x\n", power.getChipID());
+    // detection de la charge via le pogo pins
     pinMode(PIN_DETECTION, INPUT_PULLUP);
-
+    // detection
     power.enableBattDetection();
     power.enableVbusVoltageMeasure();
     power.enableBattVoltageMeasure();
