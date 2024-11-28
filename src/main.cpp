@@ -53,24 +53,28 @@ void setup()
     power.enableVbusVoltageMeasure();
     power.enableBattVoltageMeasure();
     power.enableSystemVoltageMeasure();
-
+    // tension et courant VBUS à 5v08 et 2000MA
     power.setVbusVoltageLimit(XPOWERS_AXP2101_VBUS_VOL_LIM_5V08);
     power.setVbusCurrentLimit(XPOWERS_AXP2101_VBUS_CUR_LIM_2000MA);
+    // tension de la batterie faible 
     power.setSysPowerDownVoltage(3000);
+    // courant de precharge à 50MA, charge constant 500MA, charge final 50MA
     power.setPrechargeCurr(XPOWERS_AXP2101_PRECHARGE_50MA);
-    power.setChargerConstantCurr(XPOWERS_AXP2101_CHG_CUR_200MA);
+    power.setChargerConstantCurr(XPOWERS_AXP2101_CHG_CUR_500MA);
     power.setChargerTerminationCurr(XPOWERS_AXP2101_CHG_ITERM_25MA);
+    // tension de la sortie DC1 à 3v3
     power.setDC1Voltage(3300);
+    // delay d'allumage à 2s et delay d'extension à 4s
     power.setPowerKeyPressOffTime(XPOWERS_POWEROFF_4S);
     power.setPowerKeyPressOnTime(XPOWERS_POWERON_1S);
     power.disableTSPinMeasure();
+    // configuration de la led pour indiquer l'etat charge
     power.setChargingLedMode(XPOWERS_CHG_LED_CTRL_CHG);
     uint16_t voltage_bat_low = power.getSysPowerDownVoltage();
     Serial.printf("->  getSysPowerDownVoltage:%u\n", voltage_bat_low);
     uint16_t current_input_max = power.getVbusCurrentLimit();
     Serial.printf("->  VbusCurrentLimit:%u\n", current_input_max);
-    // DC1 IMAX=2A
-    // 1500~3400mV,100mV/step,20steps
+    // desactivation de tout les sortie sauf DC1
     power.enableDC1();
     power.disableDC2();
     power.disableDC3();
