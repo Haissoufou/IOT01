@@ -37,7 +37,7 @@ void setFlag(void)
 
 void setup() 
 {
-    delay(1000);
+    delay(100);
     pinMode(boosten, OUTPUT);
     digitalWrite(boosten, HIGH);
     delay(1000);
